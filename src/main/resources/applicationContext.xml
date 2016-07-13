@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean头部 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       										 http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+													 http://www.springframework.org/schema/context
+													 http://www.springframework.org/schema/context/spring-context-4.0.xsd
+													 http://www.springframework.org/schema/util
+													 http://www.springframework.org/schema/util/spring-util.xsd
+													 http://www.springframework.org/schema/aop
+													 http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+													 http://www.springframework.org/schema/task
+													 http://www.springframework.org/schema/task/spring-task.xsd
+													 http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+	<import resource="classpath:applicationContext-mybatis.xml" />
+	<import resource="classpath:applicationContext-redis.xml" />
+
+	<bean id="requestFactory"
+		class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+		<property name="readTimeout" value="60000"></property>
+		<property name="connectTimeout" value="10000"></property>
+	</bean>
+
+	<bean id="restTemplaate" class="org.springframework.web.client.RestTemplate">
+		<constructor-arg ref="requestFactory"></constructor-arg>
+	</bean>
+
+	<bean id="httpClient" class="org.apache.commons.httpclient.HttpClient"></bean>
+	<bean id="redisClient" class="com.shaw.service.impl.RedisClient"></bean>
+	<util:properties id="config" location="classpath:config.properties" />
+
+	<task:annotation-driven />
+	<context:component-scan base-package="com.shaw" />
+</beans>
