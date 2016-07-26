@@ -50,7 +50,7 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 		 * 初始化http请求参数
 		 */
 		// DMHY长期不问题设置连接超时时间避免卡死
-		httpClient.getHttpConnectionManager().getParams().setSoTimeout(10000);
+		httpClient.getHttpConnectionManager().getParams().setSoTimeout(1000*15);
 		GetMethod getMethod = new GetMethod("http://share.dmhy.org/topics/list/page/1");
 		getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
 		getMethod.addRequestHeader("Accept",

@@ -23,7 +23,7 @@ public class MainTest {
 		// line = br.readLine();
 		// System.out.println(line);
 		// }
-		processBuilder();
+		executePythonbyInterpreter();
 	}
 
 	public static void processBuilder() throws Exception {
@@ -37,17 +37,18 @@ public class MainTest {
 				"D:\\Python27\\lib\\site-packages\\magneturi-1.2-py2.7.egg", "C:\\Windows\\system32\\python27.zip",
 				"D:\\Python27\\DLLs", "D:\\Python27\\lib", "D:\\Python27\\lib\\plat-win", "D:\\Python27\\lib\\lib-tk",
 				"D:\\Python27", "D:\\Python27\\lib\\site-packages",
-				"D:\\Python27\\lib\\site-packages\\redis-2.10.5-py2.7.egg" };
+				"D:\\Python27\\lib\\site-packages\\redis-2.10.5-py2.7.egg","D:\\Python27\\lib","D:\\Python27\\Lib" };
 		PySystemState sys = Py.getSystemState();
 		sys.setdefaultencoding("UTF-8");
 		for (String path : paths) {
 			sys.path.append(new PyString(path));
 		}
-		interpreter.execfile("pythonScript//Torrent2Magnet.py");
-		PyFunction func = (PyFunction) interpreter.get("torrent2magent", PyFunction.class);
-
-		String filepath = "pythonScript/resource/konotsuba.torrent";
-		PyObject pyobj = func.__call__(new PyString(filepath));
+		interpreter.execfile("pythonScript//Magnet2Torrent.py");
+		PyFunction func = (PyFunction) interpreter.get("main", PyFunction.class);
+		//
+		// String filepath = "pythonScript/resource/konotsuba.torrent";
+		// PyObject pyobj = func.__call__(new PyString(filepath));
+		PyObject pyobj = func.__call__();
 		System.out.println("magnet = " + pyobj.toString());
 	}
 }

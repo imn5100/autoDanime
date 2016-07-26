@@ -26,18 +26,21 @@ public class CrawlerTask {
 		logger.info("start screenMagnet");
 		dmhySpiderService.screenDayMagnet();
 	}
-
-	@Scheduled(cron = "0 0 9,11,13,15,17 * * ?")
+	
+	//	9,11,13,15,17
+	@Scheduled(cron = "0 0/1 * * * ?")
 	public void startDownloadTorrent() throws Exception {
 		logger.info("start DownloadTorrent");
 		ProcessBuilder procB = new ProcessBuilder("python", "pythonScript/Magnet2Torrent.py");
 		procB.start();
 	}
 
-	@Scheduled(cron = "0 0 10,12,14,16,18 * * ?")
-	public void startDownloadFile() throws Exception {
-		logger.info("start DownloadFile");
-		ProcessBuilder procB = new ProcessBuilder("python", "pythonScript/TorrentDownload.py");
-		procB.start();
-	}
+	
+	//下载过于耗时，转移到另外平台下载
+//	@Scheduled(cron = "0 0 10,12,14,16,18 * * ?")
+//	public void startDownloadFile() throws Exception {
+//		logger.info("start DownloadFile");
+//		ProcessBuilder procB = new ProcessBuilder("python", "pythonScript/TorrentDownload.py");
+//		procB.start();
+//	}
 }
