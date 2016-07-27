@@ -11,14 +11,15 @@
 *.war
 *.torrent
 *.pyc
+*.iml
 /resource
 /pythonScript/resource
+\.idea
 #eclipse ignore
 .settings/
 .metadata/
 .project
 .classpath
 .checkstyle
-.iml
-\.idea
+
 
