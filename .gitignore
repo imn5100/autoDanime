@@ -14,7 +14,7 @@
 *.iml
 /resource
 /pythonScript/resource
-\.idea
+/.idea
 #eclipse ignore
 .settings/
 .metadata/
