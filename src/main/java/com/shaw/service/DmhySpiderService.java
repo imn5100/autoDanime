@@ -6,19 +6,21 @@ import java.util.Map;
 import com.shaw.bo.DmhyData;
 
 public interface DmhySpiderService {
-	void executeSpider() throws Exception;
+    void executeSpider() throws Exception;
 
-	List<DmhyData> selectAnimeByTitle(String title);
+    List<DmhyData> selectAnimeByTitle(String title);
 
-	Integer batchInsert(List<DmhyData> list);
+    Integer batchInsert(List<DmhyData> list);
 
-	DmhyData selectById(Integer id);
+    DmhyData selectById(Integer id);
 
-	Integer update(DmhyData data);
+    Integer update(DmhyData data);
 
-	List<DmhyData> selectByBaseParam(Map<String, Object> params);
+    List<DmhyData> selectByBaseParam(Map<String, Object> params);
 
-	void screenDayMagnet();
+    void screenDayMagnet();
 
-	DmhyData selectOneByTitle(String title);
+    void screenDayMagnet(String startTime, String endTime);
+
+    DmhyData selectOneByTitle(String title);
 }

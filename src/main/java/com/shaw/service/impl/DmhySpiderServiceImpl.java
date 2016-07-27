@@ -21,6 +21,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -35,7 +36,9 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 	public static final String MAGNET_QUEUE = "Magnet_Queue";
 	public static final String DOWNLOAD_START = "Download_Start_%s";
 	public static final String DMHY_MAP_TITLES_MAGNET = "DMHY_Map_Titles_Magnet";
-	public static final String DMHY_ERR_LIST = "DMHY_err_List";
+	public static final String DMHY_ERR_LIST = "DMHY_Err_List";
+	@Value("#{ config['dmhy.url'] }")
+	private String DMHY_URL;
 
 	private Logger logger = LoggerFactory.getLogger(DmhySpiderServiceImpl.class);
 	@Autowired
@@ -50,8 +53,8 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 		 * 初始化http请求参数
 		 */
 		// DMHY长期不问题设置连接超时时间避免卡死
-		httpClient.getHttpConnectionManager().getParams().setSoTimeout(1000*15);
-		GetMethod getMethod = new GetMethod("http://share.dmhy.org/topics/list/page/1");
+		httpClient.getHttpConnectionManager().getParams().setSoTimeout(1000 * 15);
+		GetMethod getMethod = new GetMethod(DMHY_URL);
 		getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
 		getMethod.addRequestHeader("Accept",
 				"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
@@ -64,7 +67,7 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 		getMethod.addRequestHeader("Cookie",
 				"Hm_lvt_e4918ccc327a268ee93dac21d5a7d53c=1456210991,1456283743,1456283923,1456285631; Hm_lpvt_e4918ccc327a268ee93dac21d5a7d53c=1456294179");
 		getMethod.addRequestHeader("Host", "dmhy.dandanplay.com");
-		getMethod.addRequestHeader("refer", "http://dmhy.dandanplay.com");
+		getMethod.addRequestHeader("refer", "http://share.dmhy.org");
 		// 执行请求获取response并解析
 		int response = httpClient.executeMethod(getMethod);
 		if (response == HttpStatus.SC_OK) {
@@ -192,6 +195,11 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 			}
 
 		}
+	}
+
+	@Override
+	public void screenDayMagnet(String startTime, String endTime) {
+
 	}
 
 	@Override
