@@ -32,7 +32,7 @@ public class WiredTestObj extends SpringTestCase {
 	}
 
 	@Test
-	//查看redis和mysql数据不一致的情况
+	//查看redis和mysql数据不一致的情况 ,数据量过大时，导致一次装载占用大量内存，需要优化。
 	public void test() throws Exception {
 		List<DmhyData> list = dmhySpiderService.selectByBaseParam(new HashMap<String, Object>());
 		Map<String, Object> map = redisClient.hgetAll(DmhySpiderServiceImpl.DMHY_MAP_TITLES_MAGNET);
