@@ -67,7 +67,7 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 		getMethod.addRequestHeader("Cookie",
 				"Hm_lvt_e4918ccc327a268ee93dac21d5a7d53c=1456210991,1456283743,1456283923,1456285631; Hm_lpvt_e4918ccc327a268ee93dac21d5a7d53c=1456294179");
 		getMethod.addRequestHeader("Host", "dmhy.dandanplay.com");
-		getMethod.addRequestHeader("refer", "http://share.dmhy.org");
+		getMethod.addRequestHeader("referer", "http://share.dmhy.org");
 		// 执行请求获取response并解析
 		int response = httpClient.executeMethod(getMethod);
 		if (response == HttpStatus.SC_OK) {
