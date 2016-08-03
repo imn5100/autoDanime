@@ -17,7 +17,6 @@ import com.shaw.utils.ResponseMap;
 @Controller
 public class ParkingController {
 
-
 	@Autowired
 	RestTemplate restTemplate;
 
@@ -28,7 +27,7 @@ public class ParkingController {
 
 	@RequestMapping("/getTypeJson")
 	@ResponseBody
-	public ResponseMap<String> getParkingCardType2(HttpServletRequest request) {
+	public ResponseMap<String> getParkingCardType2(HttpServletRequest request){
 		return null;
 	}
 
