@@ -49,6 +49,7 @@ def main():
         jobj = json.loads(jstr)
         name = jobj['simpleName'];
         magnet = jobj['magnetLink']
+        print name
         if  magnet2t(magnet, 'resource/%s.torrent' % name.encode("UTF-8")):
              end_torrent(jstr, name)
         else:

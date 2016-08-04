@@ -37,6 +37,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		<property name="timeout" value="${redis.timeout}"></property>
 	</bean>
 
+	<!-- 这里的序列化工具 使用String 方便redis可视化工具查看数据。 -->
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="keySerializer">

@@ -106,7 +106,8 @@ public class DmhyData implements Serializable, Comparable<DmhyData> {
 
 	@Override
 	public int compareTo(DmhyData o) {
-		return downNum + comNum + seedNum - (o.getComNum() + o.getDownNum() + o.getSeedNum());
+		//需要逆序排 DESC，质量最好的有限排前面。
+		return (downNum + comNum + seedNum - (o.getComNum() + o.getDownNum() + o.getSeedNum())) * -1;
 	}
 
 	@Override

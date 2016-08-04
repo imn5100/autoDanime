@@ -180,8 +180,10 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 			if (datas == null || datas.size() <= 0) {
 				continue;
 			}
-			Arrays.sort(datas.toArray());
-			DmhyData downloadData = datas.get(0);
+			DmhyData[] sortData = new DmhyData[datas.size()];
+			sortData = datas.toArray(sortData);
+			Arrays.sort(sortData);
+			DmhyData downloadData = sortData[0];
 			downloadData.setSimpleName(title + TimeUtils.getFormatTimeByFormat(new Date(), "MMddHHmm"));
 			String jsonStr = JSONObject.toJSONString(downloadData);
 			// 将需要下载的magnet放入缓冲set 队列中，等待python脚本消费

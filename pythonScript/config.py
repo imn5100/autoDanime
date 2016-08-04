@@ -6,6 +6,7 @@ class Config:
     def __init__(self, path):
         self.path = path
         self.cf = ConfigParser.ConfigParser()
+        #self.cf.readfp(codecs.open(path, "r", "utf-8"))
         self.cf.read(self.path)
     def get(self, field, key):
         result = ""
