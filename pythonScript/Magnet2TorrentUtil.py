@@ -26,7 +26,7 @@ def magnet2t(link, tfile):
         torinfo = handle.get_torrent_info()
         torfile = lt.create_torrent(torinfo)
 
-        t = open(tfile.decode("utf-8"), "wb")
+        t = open(tfile, "wb")
         t.write(lt.bencode(torfile.generate()))
         t.close()
         print '%s  generated!' % tfile
