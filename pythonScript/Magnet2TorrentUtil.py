@@ -26,7 +26,7 @@ def magnet2t(link, tfile):
         torinfo = handle.get_torrent_info()
         torfile = lt.create_torrent(torinfo)
 
-        t = open(tfile, "wb")
+        t = open(tfile.decode("UTF-8"), "wb")
         t.write(lt.bencode(torfile.generate()))
         t.close()
         print '%s  generated!' % tfile
@@ -39,7 +39,7 @@ def main(config_file_path):
     config = Config(config_file_path)
     filename = config.get('global', 'filename')
     magent = config.get('global', 'magnet')
-    print "start download file %s" % filename;
+    print "start download file %s" % filename.decode("utf-8");
     magnet2t(magent, 'resource/%s.torrent' % filename);
     return;
     
