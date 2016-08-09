@@ -52,7 +52,7 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 		/*
 		 * 初始化http请求参数
 		 */
-		// DMHY长期不问题设置连接超时时间避免卡死
+		// DMHY长期不稳定设置连接超时时间避免卡死
 		httpClient.getHttpConnectionManager().getParams().setSoTimeout(1000 * 15);
 		GetMethod getMethod = new GetMethod(DMHY_URL);
 		getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
@@ -75,7 +75,6 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 			Document doc = Jsoup.parse(html);
 			Element table = doc.getElementsByTag("tbody").get(0);
 			Elements datas = table.children();
-			System.out.println();
 			List<DmhyData> list = new ArrayList<DmhyData>();
 			Map<String, Object> redisData = new HashMap<String, Object>();
 			int updateCount = 0;
