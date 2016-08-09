@@ -49,25 +49,9 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 	private HttpClient httpClient;
 
 	public void executeSpider() throws Exception {
-		/*
-		 * 初始化http请求参数
-		 */
 		// DMHY长期不稳定设置连接超时时间避免卡死
 		httpClient.getHttpConnectionManager().getParams().setSoTimeout(1000 * 15);
-		GetMethod getMethod = new GetMethod(DMHY_URL);
-		getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
-		getMethod.addRequestHeader("Accept",
-				"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-		getMethod.addRequestHeader("Accept-Language", "gzip, deflate, sdch");
-		getMethod.addRequestHeader("Content-Type", "gzip");
-		getMethod.addRequestHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6");
-		getMethod.addRequestHeader("Connection", "keep-alive");
-		getMethod.addRequestHeader("User-Agent",
-				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36");
-		getMethod.addRequestHeader("Cookie",
-				"Hm_lvt_e4918ccc327a268ee93dac21d5a7d53c=1456210991,1456283743,1456283923,1456285631; Hm_lpvt_e4918ccc327a268ee93dac21d5a7d53c=1456294179");
-		getMethod.addRequestHeader("Host", "dmhy.dandanplay.com");
-		getMethod.addRequestHeader("referer", "http://share.dmhy.org");
+		GetMethod getMethod = buildRequestGetMethod(DMHY_URL);
 		// 执行请求获取response并解析
 		int response = httpClient.executeMethod(getMethod);
 		if (response == HttpStatus.SC_OK) {
@@ -126,31 +110,11 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 				System.out.println("更新了" + updateCount + "条记录");
 				System.out.println("新抓取" + list.size() + "条记录");
 			} catch (Exception e) {
-				System.err.println("SLQ EXECUTE  ERROR");
+				System.err.println("SQL EXECUTE  ERROR");
 				throw e;
 			}
 		}
 
-	}
-
-	private int valueOfInteger(String num) {
-		if (StringUtils.isBlank(num))
-			return 0;
-		int result = 0;
-		try {
-			result = Integer.valueOf(num);
-		} catch (Exception e) {
-
-		}
-		return result;
-	}
-
-	private boolean allIsNotBlank(String... strs) {
-		for (String s : strs) {
-			if (StringUtils.isBlank(s))
-				return false;
-		}
-		return true;
 	}
 
 	// 筛选：必须需求:分类为动画(動畫)（熟肉）。2.出现多组取 种子数+下载数+完成数 最大值下载3.未下载的动画
@@ -200,7 +164,7 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 
 	@Override
 	public void screenDayMagnet(String startTime, String endTime) {
-
+		
 	}
 
 	@Override
@@ -236,5 +200,47 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 	@Override
 	public DmhyData selectOneByTitle(String title) {
 		return this.dmhyDataMapper.selectOneByTitle(title);
+	}
+
+	private GetMethod buildRequestGetMethod(String uri) {
+		GetMethod getMethod = new GetMethod(uri);
+		/*
+		 * 初始化http请求参数
+		 */
+		getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler());
+		getMethod.addRequestHeader("Accept",
+				"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+		getMethod.addRequestHeader("Accept-Language", "gzip, deflate, sdch");
+		getMethod.addRequestHeader("Content-Type", "gzip");
+		getMethod.addRequestHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6");
+		getMethod.addRequestHeader("Connection", "keep-alive");
+		getMethod.addRequestHeader("User-Agent",
+				"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36");
+		getMethod.addRequestHeader("Cookie",
+				"Hm_lvt_e4918ccc327a268ee93dac21d5a7d53c=1456210991,1456283743,1456283923,1456285631; Hm_lpvt_e4918ccc327a268ee93dac21d5a7d53c=1456294179");
+		getMethod.addRequestHeader("Host", "dmhy.dandanplay.com");
+		getMethod.addRequestHeader("referer", "http://share.dmhy.org");
+		return getMethod;
+
+	}
+
+	private int valueOfInteger(String num) {
+		if (StringUtils.isBlank(num))
+			return 0;
+		int result = 0;
+		try {
+			result = Integer.valueOf(num);
+		} catch (Exception e) {
+
+		}
+		return result;
+	}
+
+	private boolean allIsNotBlank(String... strs) {
+		for (String s : strs) {
+			if (StringUtils.isBlank(s))
+				return false;
+		}
+		return true;
 	}
 }

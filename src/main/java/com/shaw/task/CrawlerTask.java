@@ -15,7 +15,7 @@ public class CrawlerTask {
 	private DmhySpiderService dmhySpiderService;
 	private Logger logger = LoggerFactory.getLogger(DmhySpiderServiceImpl.class);
 
-	// 抓取数据并分析，没六小时一次。
+	// 抓取数据并分析，六小时一次。
 	@Scheduled(cron = "0 0 0/6 * * ?")
 	public void startCrawler() throws Exception {
 		logger.info("startCrawler");
