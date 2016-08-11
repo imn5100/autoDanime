@@ -107,10 +107,8 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 				}
 				logger.info("更新了" + updateCount + "条记录");
 				logger.info("新抓取" + list.size() + "条记录");
-				System.out.println("更新了" + updateCount + "条记录");
-				System.out.println("新抓取" + list.size() + "条记录");
 			} catch (Exception e) {
-				System.err.println("SQL EXECUTE  ERROR");
+				logger.error("executeSpider SQL EXECUTE  ERROR:" + e.getMessage());
 				throw e;
 			}
 		}
@@ -164,7 +162,7 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 
 	@Override
 	public void screenDayMagnet(String startTime, String endTime) {
-		
+
 	}
 
 	@Override
