@@ -15,7 +15,7 @@ public class DmhyDataServerImpl implements DmhyDataServer {
 
 	@Override
 	public List<DmhyData> selectByBaseParam(Map<String, Object> param) {
-		if (param != null && param.size() > 1)
+		if (param != null && param.size() >= 1)
 			return dmhySpiderService.selectByBaseParam(param);
 		else
 			return null;
