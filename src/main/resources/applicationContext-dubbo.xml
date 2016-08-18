@@ -11,7 +11,7 @@
         ">
 
 	<!-- 具体的实现bean -->
-	<bean id="dmhyDataServer" class="com.shaw.provider.DmhyDataServerImpl" />
+	<bean id="dmhyDataServer" class="com.shaw.provider.DmhyDataServiceImpl" />
 
 	<!-- 提供方应用信息，用于计算依赖关系 -->
 	<dubbo:application name="provider" />
@@ -25,7 +25,7 @@
 	<dubbo:protocol name="dubbo" port="20880" />
 
 	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:service interface="com.shaw.provider.DmhyDataServer"
+	<dubbo:service interface="com.shaw.provider.DmhyDataService"
 		ref="dmhyDataServer" version="1.0.0" />
 
 </beans>

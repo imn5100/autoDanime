@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.shaw.bo.DmhyData;
 import com.shaw.service.DmhySpiderService;
 
-public class DmhyDataServerImpl implements DmhyDataServer {
+public class DmhyDataServiceImpl implements DmhyDataService {
 
 	@Autowired
 	private DmhySpiderService dmhySpiderService;
