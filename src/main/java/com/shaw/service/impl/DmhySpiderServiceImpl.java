@@ -58,10 +58,12 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 			String html = getMethod.getResponseBodyAsString();
 			Document doc = Jsoup.parse(html);
 			Element table = doc.getElementsByTag("tbody").get(0);
+			//tr
 			Elements datas = table.children();
 			List<DmhyData> list = new ArrayList<DmhyData>();
 			Map<String, Object> redisData = new HashMap<String, Object>();
 			int updateCount = 0;
+			//迭代
 			for (Element data : datas) {
 				String time, classi, title, magnetLink, size, seedNum, publisher, comNum, downNum;
 				time = data.child(0).child(0).ownText();
