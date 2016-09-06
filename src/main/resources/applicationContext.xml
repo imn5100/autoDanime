@@ -19,7 +19,7 @@
 
 	<import resource="classpath:applicationContext-mybatis.xml" />
 	<import resource="classpath:applicationContext-redis.xml" />
-	<import resource="classpath:applicationContext-dubbo.xml" />
+	<!--  <import resource="classpath:applicationContext-dubbo.xml" /> -->
 
 	<bean id="requestFactory"
 		class="org.springframework.http.client.SimpleClientHttpRequestFactory">
