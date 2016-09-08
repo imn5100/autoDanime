@@ -1,13 +1,12 @@
 package com.shaw.task;
 
+import com.shaw.service.DmhySpiderService;
+import com.shaw.service.impl.DmhySpiderServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import com.shaw.service.DmhySpiderService;
-import com.shaw.service.impl.DmhySpiderServiceImpl;
 
 @Component
 public class CrawlerTask {

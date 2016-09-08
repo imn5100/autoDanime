@@ -8,6 +8,8 @@
 */
 package com.shaw.utils;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
@@ -15,8 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import org.apache.commons.lang.StringUtils;
 
 public class TimeUtils {
 	public static final String HOUR_FORMAT = "HH:mm";

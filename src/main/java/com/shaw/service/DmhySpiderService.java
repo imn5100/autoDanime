@@ -1,9 +1,9 @@
 package com.shaw.service;
 
+import com.shaw.bo.DmhyData;
+
 import java.util.List;
 import java.util.Map;
-
-import com.shaw.bo.DmhyData;
 
 public interface DmhySpiderService {
     void executeSpider() throws Exception;
@@ -23,4 +23,6 @@ public interface DmhySpiderService {
     void screenDayMagnet(String startTime, String endTime);
 
     DmhyData selectOneByTitle(String title);
+    
+	Integer deleteById(Integer id);
 }

@@ -1,9 +1,9 @@
 package com.shaw.mapper;
 
+import com.shaw.bo.DmhyData;
+
 import java.util.List;
 import java.util.Map;
-
-import com.shaw.bo.DmhyData;
 
 public interface DmhyDataMapper {
 	List<DmhyData> selectAnimeByTitle(String title);
@@ -17,4 +17,6 @@ public interface DmhyDataMapper {
 	Integer update(DmhyData data);
 
 	DmhyData selectOneByTitle(String title);
+
+	Integer deleteById(Integer id);
 }
