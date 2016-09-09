@@ -5,4 +5,6 @@
 <p>将磁链下载为种子的脚本(java轮询调用)-python</p>
 <p>种子下载脚本-python</p>
 
+<p>python_test项目下的Crawler共用mysql与redis数据<p>
+
 
