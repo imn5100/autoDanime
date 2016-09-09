@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface DmhySpiderService {
-    void executeSpider() throws Exception;
+    void executeSpider(String speicalUrl) throws Exception;
 
     List<DmhyData> selectAnimeByTitle(String title);
 
@@ -23,6 +23,6 @@ public interface DmhySpiderService {
     void screenDayMagnet(String startTime, String endTime);
 
     DmhyData selectOneByTitle(String title);
-    
-	Integer deleteById(Integer id);
+
+    Integer deleteById(Integer id);
 }

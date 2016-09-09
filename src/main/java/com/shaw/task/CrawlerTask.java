@@ -18,7 +18,7 @@ public class CrawlerTask {
 	@Scheduled(cron = "0 0 0/6 * * ?")
 	public void startCrawler() throws Exception {
 		logger.info("startCrawler");
-		dmhySpiderService.executeSpider();
+		dmhySpiderService.executeSpider(null);
 		logger.info("start screenMagnet");
 		dmhySpiderService.screenDayMagnet();
 	}
