@@ -19,4 +19,6 @@ public interface DmhyDataMapper {
 	DmhyData selectOneByTitle(String title);
 
 	Integer deleteById(Integer id);
+
+	Long countByBaseParam(Map<String, Object> params);
 }
