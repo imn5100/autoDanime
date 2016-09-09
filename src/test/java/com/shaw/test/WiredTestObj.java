@@ -1,27 +1,21 @@
 package com.shaw.test;
 
+import com.shaw.bo.DmhyData;
+import com.shaw.constant.Constants;
+import com.shaw.service.DmhySpiderService;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import redis.clients.jedis.Jedis;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.shaw.bo.DmhyData;
-import com.shaw.constant.Constants;
-import com.shaw.service.DmhySpiderService;
-import com.shaw.service.impl.RedisClient;
-
-import redis.clients.jedis.Jedis;
-
 public class WiredTestObj extends SpringTestCase {
 
 	@Autowired
 	private DmhySpiderService dmhySpiderService;
-
-	@Autowired
-	private RedisClient redisClient;
 
 	@Autowired
 	private Jedis singleRedisClient;
@@ -40,23 +34,27 @@ public class WiredTestObj extends SpringTestCase {
 	// 查看redis和mysql数据不一致的情况 ,数据库包含，redis无
 	public void checkMysqlToRedis() throws Exception {
 		List<DmhyData> list = dmhySpiderService.selectByBaseParam(new HashMap<String, Object>());
-		int count = 0;
+		List<DmhyData> redundancys = new ArrayList<DmhyData>();
 		for (DmhyData key : list) {
-			if (!redisClient.hexists(Constants.DMHY_MAP_TITLES_MAGNET, key.getTitle())) {
+			if (!singleRedisClient.hexists(Constants.DMHY_MAP_TITLES_MAGNET, key.getTitle())) {
 				System.err.println(key.toString());
-				count++;
+				redundancys.add(key);
 			}
 		}
-		System.out.println(count);
+		System.out.println(redundancys.size());
+		for (DmhyData data : redundancys) {
+			singleRedisClient.hset(Constants.DMHY_MAP_TITLES_MAGNET, data.getTitle(), data.getMagnetLink());
+		}
 	}
 
-	@Test
-	// 查看redis和mysql数据不一致的情况 ,数据库包含，redis无
 	/**
 	 * 问题。 python 也操作过redis的同一map，java存储 title-magnet
-	 * 时，是当作String对象存储的，而python则是当字符串存储。导致java 获取到未序列化的 magnet 解析式报错
-	 *
+	 * 时，是当作String对象存储的，而python则是当字符串存储。导致java 获取到未序列化的 magnet 解析式报错 这里使用
+	 * singleRedisClient，直接取得原本的字符串，不进行反序列化操作。
 	 */
+	@Test
+	// 查看redis和mysql数据不一致的情况 ,redis包含,数据库无
+	// 并清除redis 多余无用数据
 	public void checkRedisToMysql() throws Exception {
 		Map<String, String> map = singleRedisClient.hgetAll(Constants.DMHY_MAP_TITLES_MAGNET);
 		List<String> titles = new ArrayList<String>();
@@ -69,7 +67,8 @@ public class WiredTestObj extends SpringTestCase {
 		for (String title : titles) {
 			System.out.println(title);
 		}
-
+		// singleRedisClient.hdel(Constants.DMHY_MAP_TITLES_MAGNET,
+		// titles.toArray(new String[] {}));
 	}
 
 	/**
@@ -85,9 +84,8 @@ public class WiredTestObj extends SpringTestCase {
 		// 这里为了确保数据一致性，必须单条删除。否则要手动改 redis和mysql
 		for (DmhyData key : list) {
 			if (dmhySpiderService.deleteById(key.getId()) == 1) {
-				redisClient.hdel(Constants.DMHY_MAP_TITLES_MAGNET, key.getTitle());
+				singleRedisClient.hdel(Constants.DMHY_MAP_TITLES_MAGNET, key.getTitle());
 			}
 		}
-
 	}
 }

@@ -3,118 +3,127 @@ package com.shaw.bo;
 import java.io.Serializable;
 
 public class DmhyData implements Serializable, Comparable<DmhyData> {
-	private static final long serialVersionUID = 923336378712006176L;
-	private Integer id;
-	private String time;
-	private String classi;
-	private String title;
-	private String magnetLink;
-	private String size;
-	private String publisher;
-	private Integer seedNum;
-	private Integer comNum;
-	private Integer downNum;
-	private String simpleName;
+    private static final long serialVersionUID = 923336378712006176L;
+    private Integer id;
+    private String time;
+    private String classi;
+    private String title;
+    private String magnetLink;
+    private String size;
+    private String publisher;
+    private Integer seedNum;
+    private Integer comNum;
+    private Integer downNum;
+    private String simpleName;
+    private Long createTime;
 
-	public String getSimpleName() {
-		return simpleName;
-	}
+    public Long getCreateTime() {
+        return createTime;
+    }
 
-	public void setSimpleName(String simpleName) {
-		this.simpleName = simpleName;
-	}
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public String getSimpleName() {
+        return simpleName;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setSimpleName(String simpleName) {
+        this.simpleName = simpleName;
+    }
 
-	public String getTime() {
-		return time;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setTime(String time) {
-		this.time = time;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getClassi() {
-		return classi;
-	}
+    public String getTime() {
+        return time;
+    }
 
-	public void setClassi(String classi) {
-		this.classi = classi;
-	}
+    public void setTime(String time) {
+        this.time = time;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getClassi() {
+        return classi;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setClassi(String classi) {
+        this.classi = classi;
+    }
 
-	public String getMagnetLink() {
-		return magnetLink;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setMagnetLink(String magnetLink) {
-		this.magnetLink = magnetLink;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getSize() {
-		return size;
-	}
+    public String getMagnetLink() {
+        return magnetLink;
+    }
 
-	public void setSize(String size) {
-		this.size = size;
-	}
+    public void setMagnetLink(String magnetLink) {
+        this.magnetLink = magnetLink;
+    }
 
-	public String getPublisher() {
-		return publisher;
-	}
+    public String getSize() {
+        return size;
+    }
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
+    public void setSize(String size) {
+        this.size = size;
+    }
 
-	public Integer getSeedNum() {
-		return seedNum;
-	}
+    public String getPublisher() {
+        return publisher;
+    }
 
-	public void setSeedNum(Integer seedNum) {
-		this.seedNum = seedNum;
-	}
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
-	public Integer getComNum() {
-		return comNum;
-	}
+    public Integer getSeedNum() {
+        return seedNum;
+    }
 
-	public void setComNum(Integer comNum) {
-		this.comNum = comNum;
-	}
+    public void setSeedNum(Integer seedNum) {
+        this.seedNum = seedNum;
+    }
 
-	public Integer getDownNum() {
-		return downNum;
-	}
+    public Integer getComNum() {
+        return comNum;
+    }
 
-	public void setDownNum(Integer downNum) {
-		this.downNum = downNum;
-	}
+    public void setComNum(Integer comNum) {
+        this.comNum = comNum;
+    }
 
-	@Override
-	public int compareTo(DmhyData o) {
-		//需要逆序排 DESC，质量最好的有限排前面。
-		return (downNum + comNum + seedNum - (o.getComNum() + o.getDownNum() + o.getSeedNum())) * -1;
-	}
+    public Integer getDownNum() {
+        return downNum;
+    }
 
-	@Override
-	public String toString() {
-		return "DmhyData [id=" + id + ", time=" + time + ", classi=" + classi + ", title=" + title + ", magnetLink="
-				+ magnetLink + ", size=" + size + ", publisher=" + publisher + ", seedNum=" + seedNum + ", comNum="
-				+ comNum + ", downNum=" + downNum + ", simpleName=" + simpleName + "]";
-	}
+    public void setDownNum(Integer downNum) {
+        this.downNum = downNum;
+    }
+
+    @Override
+    public int compareTo(DmhyData o) {
+        //需要逆序排 DESC，质量最好的有限排前面。
+        return (downNum + comNum + seedNum - (o.getComNum() + o.getDownNum() + o.getSeedNum())) * -1;
+    }
+
+    @Override
+    public String toString() {
+        return "DmhyData [id=" + id + ", time=" + time + ", classi=" + classi + ", title=" + title + ", magnetLink="
+                + magnetLink + ", size=" + size + ", publisher=" + publisher + ", seedNum=" + seedNum + ", comNum="
+                + comNum + ", downNum=" + downNum + ", simpleName=" + simpleName + "]";
+    }
 
 }

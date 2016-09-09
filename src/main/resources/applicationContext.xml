@@ -17,6 +17,7 @@
 
     <import resource="classpath:applicationContext-mybatis.xml"/>
     <import resource="classpath:applicationContext-redis.xml"/>
+    <!-- 暂时移除dubbo服务提供-->
     <!--  <import resource="classpath:applicationContext-dubbo.xml" /> -->
 
     <bean id="requestFactory"
@@ -30,7 +31,6 @@
     </bean>
 
     <bean id="httpClient" class="org.apache.commons.httpclient.HttpClient"></bean>
-    <bean id="redisClient" class="com.shaw.service.impl.RedisClient"></bean>
 
     <!-- 配置文件 -->
     <util:properties id="config" location="classpath:config.properties"/>

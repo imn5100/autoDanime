@@ -12,42 +12,44 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
 
-	<!-- jedis 配置 -->
-	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-		<property name="maxIdle" value="${redis.maxIdle}" />
-		<property name="minIdle" value="${redis.minIdle}" />
-		<property name="maxTotal" value="${redis.maxTotal}" />
-		<property name="maxWaitMillis" value="${redis.maxWait}" />
-		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
-	</bean>
+	<!-- 本项目暂时不需要redis连接操作-->
+	<!--&lt;!&ndash; jedis 连接池配置配置 &ndash;&gt;-->
+	<!--<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">-->
+		<!--<property name="maxIdle" value="${redis.maxIdle}" />-->
+		<!--<property name="minIdle" value="${redis.minIdle}" />-->
+		<!--<property name="maxTotal" value="${redis.maxTotal}" />-->
+		<!--<property name="maxWaitMillis" value="${redis.maxWait}" />-->
+		<!--<property name="testOnBorrow" value="${redis.testOnBorrow}" />-->
+	<!--</bean>-->
 
-	<!-- redis服务器中心 -->
-	<bean id="connectionFactory"
-		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-		<property name="poolConfig" ref="poolConfig" />
-		<property name="port" value="${redis.port}" />
-		<property name="hostName" value="${redis.host}" />
-		<!-- <property name="password" value="${redis.password}" /> -->
-		<property name="timeout" value="${redis.timeout}"></property>
-	</bean>
+	<!--&lt;!&ndash; redis服务器中心 &ndash;&gt;-->
+	<!--<bean id="connectionFactory"-->
+		<!--class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">-->
+		<!--<property name="poolConfig" ref="poolConfig" />-->
+		<!--<property name="port" value="${redis.port}" />-->
+		<!--<property name="hostName" value="${redis.host}" />-->
+		<!--&lt;!&ndash; <property name="password" value="${redis.password}" /> &ndash;&gt;-->
+		<!--<property name="timeout" value="${redis.timeout}"></property>-->
+	<!--</bean>-->
 
-	<!-- 这里的序列化工具 使用String 方便redis可视化工具查看数据。 -->
-	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="keySerializer">
-			<bean
-				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-		</property>
-		<property name="valueSerializer">
-			<bean
-				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-		</property>
-		<property name="hashKeySerializer">
-			<bean
-				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-		</property>
-	</bean>
-
+	<!--&lt;!&ndash; 这里的序列化工具 使用String 方便redis可视化工具查看数据。 &ndash;&gt;-->
+	<!--<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">-->
+		<!--<property name="connectionFactory" ref="connectionFactory" />-->
+		<!--<property name="keySerializer">-->
+			<!--<bean-->
+				<!--class="org.springframework.data.redis.serializer.StringRedisSerializer" />-->
+		<!--</property>-->
+		<!--<property name="valueSerializer">-->
+			<!--<bean-->
+				<!--class="org.springframework.data.redis.serializer.StringRedisSerializer" />-->
+		<!--</property>-->
+		<!--<property name="hashKeySerializer">-->
+			<!--<bean-->
+				<!--class="org.springframework.data.redis.serializer.StringRedisSerializer" />-->
+		<!--</property>-->
+	<!--</bean>-->
+	
+	<!-- 简化redis连接 使用单连接操作redis -->
 	<bean id="singleRedisClient" class="redis.clients.jedis.Jedis">
 		<constructor-arg value="${redis.host}" type="java.lang.String" />
 		<constructor-arg value="${redis.port}" type="int" />

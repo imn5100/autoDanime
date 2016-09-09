@@ -12,11 +12,12 @@
         <result column="publisher" property="publisher"/>
         <result column="comNum" property="comNum"/>
         <result column="downNum" property="downNum"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
     <sql id="Base_Column_List">
 		id,time, classi, title, magnetLink, size, seedNum,
 		publisher,
-		comNum, downNum
+		comNum, downNum,create_time
 	</sql>
 
 
@@ -56,7 +57,7 @@
         insert into dmhy
         (id,time, classi, title, magnetLink, size, seedNum,
         publisher,
-        comNum, downNum)
+        comNum, downNum,create_time)
         values
         <foreach collection="list" item="item" index="index"
                  separator=",">
@@ -69,7 +70,8 @@
             #{item.seedNum},
             #{item.publisher},
             #{item.comNum},
-            #{item.downNum})
+            #{item.downNum},
+            #{item.createTime})
         </foreach>
     </insert>
 
