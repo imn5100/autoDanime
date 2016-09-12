@@ -532,15 +532,10 @@ public class TimeUtils {
 		return null;
 	}
 
-	public static Date formatDate(String date, String formatPattern) {
-		try {
-			SimpleDateFormat formatter = new SimpleDateFormat(formatPattern);
-			Date result = formatter.parse(date);
-			return result;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public static Date formatDate(String date, String formatPattern) throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat(formatPattern);
+		Date result = formatter.parse(date);
+		return result;
 	}
 
 	/**

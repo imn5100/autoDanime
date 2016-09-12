@@ -31,6 +31,7 @@
     </bean>
 
     <bean id="httpClient" class="org.apache.commons.httpclient.HttpClient"></bean>
+    <bean id="dmhyDataIndex" class="com.shaw.lucene.DmhyDataIndex"></bean>
 
     <!-- 配置文件 -->
     <util:properties id="config" location="classpath:config.properties"/>

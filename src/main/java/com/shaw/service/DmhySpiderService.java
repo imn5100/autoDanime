@@ -10,11 +10,11 @@ public interface DmhySpiderService {
 
     List<DmhyData> selectAnimeByTitle(String title);
 
-    Integer batchInsert(List<DmhyData> list);
+    Integer batchInsert(List<DmhyData> list) throws Exception;
 
     DmhyData selectById(Integer id);
 
-    Integer update(DmhyData data);
+    Integer update(DmhyData data) throws Exception;
 
     List<DmhyData> selectByBaseParam(Map<String, Object> params);
 
@@ -24,7 +24,9 @@ public interface DmhySpiderService {
 
     DmhyData selectOneByTitle(String title);
 
-    Integer deleteById(Integer id);
-    
+    Integer deleteById(Integer id) throws Exception;
+
     Long countByBaseParam(Map<String, Object> params);
+
+    Integer safeBatchInsert(List<DmhyData> list) throws Exception;
 }

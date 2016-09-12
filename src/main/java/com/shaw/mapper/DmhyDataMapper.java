@@ -6,19 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 public interface DmhyDataMapper {
-	List<DmhyData> selectAnimeByTitle(String title);
+    List<DmhyData> selectAnimeByTitle(String title);
 
-	List<DmhyData> selectByBaseParam(Map<String, Object> params);
+    List<DmhyData> selectByBaseParam(Map<String, Object> params);
 
-	Integer batchInsert(List<DmhyData> list);
+    Integer batchInsert(List<DmhyData> list);
 
-	DmhyData selectById(Integer id);
+    Integer insert(DmhyData data);
 
-	Integer update(DmhyData data);
+    DmhyData selectById(Integer id);
 
-	DmhyData selectOneByTitle(String title);
+    Integer update(DmhyData data);
 
-	Integer deleteById(Integer id);
+    DmhyData selectOneByTitle(String title);
 
-	Long countByBaseParam(Map<String, Object> params);
+    Integer deleteById(Integer id);
+
+    Long countByBaseParam(Map<String, Object> params);
 }

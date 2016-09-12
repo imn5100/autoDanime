@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WiredTestObj extends SpringTestCase {
+public class DmhySpiderTest extends SpringTestCase {
 
 	@Autowired
 	private DmhySpiderService dmhySpiderService;
@@ -26,7 +26,7 @@ public class WiredTestObj extends SpringTestCase {
 	@Test
 	public void testSpider() throws Exception {
 		String keyword = "";
-		int page = 1;
+		int page = 15;
 		String encodeKeyword = URLEncoder.encode(keyword, "utf-8");
 		String url = String.format(searchUrl, page, encodeKeyword);
 		dmhySpiderService.executeSpider(url);
