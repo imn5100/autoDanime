@@ -26,7 +26,7 @@ public class DmhySpiderTest extends SpringTestCase {
 	@Test
 	public void testSpider() throws Exception {
 		String keyword = "";
-		int page = 15;
+		int page = 1;
 		String encodeKeyword = URLEncoder.encode(keyword, "utf-8");
 		String url = String.format(searchUrl, page, encodeKeyword);
 		dmhySpiderService.executeSpider(url);
