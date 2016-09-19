@@ -21,7 +21,7 @@
     <aop:aspectj-autoproxy/>
     <import resource="classpath:applicationContext-mybatis.xml"/>
     <import resource="classpath:applicationContext-redis.xml"/>
-    <import resource="classpath:dubbo-consumer.xml"/>
+    <!-- <import resource="classpath:dubbo-consumer.xml"/> -->
 
     <bean id="requestFactory"
           class="org.springframework.http.client.SimpleClientHttpRequestFactory">
