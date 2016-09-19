@@ -21,7 +21,7 @@ public class SearchTest extends SpringTestCase {
 
 	@Test
 	public void testSearchDmhyData() throws Exception {
-		String keyword = "美術社";
+		String keyword = "Ozmafia";
 		Result<List<DmhyDataVo>> result = dmhyDataSearchService.searchDmhyData(keyword);
 		if (result != null && result.isSuccess() && result.getModel() != null) {
 			for (DmhyDataVo vo : result.getModel()) {

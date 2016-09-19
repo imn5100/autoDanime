@@ -36,7 +36,7 @@ public class LuceneTest extends SpringTestCase {
 
     public static void main(String[] args) throws Exception {
         DmhyDataIndex dmhyDataIndex = new DmhyDataIndex();
-        List<DmhyData> datas = dmhyDataIndex.searchAnime("從零");
+        List<DmhyData> datas = dmhyDataIndex.searchAnime("Ozmafia");
         for (DmhyData data : datas) {
             System.out.println(data);
         }
