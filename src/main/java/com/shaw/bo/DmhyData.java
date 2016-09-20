@@ -121,9 +121,9 @@ public class DmhyData implements Serializable, Comparable<DmhyData> {
 
 	@Override
 	public String toString() {
-		return "DmhyData [id=" + id + ", time=" + time + ", classi=" + classi + ", title=" + title + ", magnetLink="
-				+ magnetLink + ", size=" + size + ", publisher=" + publisher + ", seedNum=" + seedNum + ", comNum="
-				+ comNum + ", downNum=" + downNum + ", simpleName=" + simpleName + "]";
+		return "DmhyData [id=" + id + ", time=" + time + ", classi=" + classi + ", title=" + title + ", size=" + size
+				+ ", publisher=" + publisher + ", seedNum=" + seedNum + ", comNum=" + comNum + ", downNum=" + downNum
+				+ ", magnetLink=" + magnetLink + ", simpleName=" + simpleName + "]";
 	}
 
 	// 判断是否需要更新操作
@@ -136,7 +136,8 @@ public class DmhyData implements Serializable, Comparable<DmhyData> {
 				&& seedNum.equals(data.getSeedNum())) {
 			return true;
 		} else {
-//			System.out.println("update:oldData:" + this.toString() + " newData:" + data);
+			// System.out.println("update:oldData:" + this.toString() + "
+			// newData:" + data);
 			return false;
 		}
 	}

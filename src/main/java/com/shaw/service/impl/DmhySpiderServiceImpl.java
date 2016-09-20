@@ -1,22 +1,19 @@
 package com.shaw.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.shaw.bo.DmhyData;
-import com.shaw.constant.Constants;
-import com.shaw.lucene.DmhyDataIndex;
-import com.shaw.mapper.DmhyDataMapper;
-import com.shaw.service.DmhySpiderService;
-import com.shaw.utils.PropertiesUtil;
-import com.shaw.utils.TimeUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,9 +23,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
 
-import java.util.*;
+import com.alibaba.fastjson.JSONObject;
+import com.shaw.bo.DmhyData;
+import com.shaw.constant.Constants;
+import com.shaw.mapper.DmhyDataMapper;
+import com.shaw.service.DmhySpiderService;
+import com.shaw.utils.PropertiesUtil;
+import com.shaw.utils.TimeUtils;
+
+import redis.clients.jedis.Jedis;
 
 @Service
 public class DmhySpiderServiceImpl implements DmhySpiderService {
@@ -45,8 +49,9 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 	private Jedis singleRedisClient;
 	@Autowired
 	private HttpClient httpClient;
-	@Autowired
-	private DmhyDataIndex dmhyDataIndex;
+	// 更删lucene 索引的操作已移至 搜索中心。不需要在这里操作
+	// @Autowired
+	// private DmhyDataIndex dmhyDataIndex;
 
 	@Override
 	public void executeSpider(String speicalUrl) throws Exception {
@@ -210,8 +215,8 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 	@Override
 	public Integer update(DmhyData data) throws Exception {
 		int returnCount = this.dmhyDataMapper.update(data);
-		if (returnCount > 0)
-			dmhyDataIndex.updateIndex(data);
+		// if (returnCount > 0)
+		// dmhyDataIndex.updateIndex(data);
 		return returnCount;
 	}
 
@@ -235,8 +240,8 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 	@Override
 	public Integer deleteById(Integer id) throws Exception {
 		int returnCount = this.dmhyDataMapper.deleteById(id);
-		if (returnCount > 0)
-			dmhyDataIndex.deleteIndex(String.valueOf(id));
+		// if (returnCount > 0)
+		// dmhyDataIndex.deleteIndex(String.valueOf(id));
 		return returnCount;
 	}
 
@@ -245,25 +250,28 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 		return dmhyDataMapper.countByBaseParam(params);
 	}
 
-	@Autowired
-	private SqlSessionFactory sqlSessionFactory;
+	// @Autowired
+	// private SqlSessionFactory sqlSessionFactory;
 
 	/**
 	 * 为了获取插入时的ID，采用非拼装sql方式 批量插入
 	 */
 	public Integer safeBatchInsert(List<DmhyData> list) throws Exception {
-		SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH);
-		int count = 0;
-		try {
-			for (DmhyData data : list) {
-				count = count + session.insert("com.shaw.mapper.DmhyDataMapper.insert", data);
-			}
-			session.commit();
-		} catch (Exception e) {
-			session.rollback();
-		}
-		dmhyDataIndex.addIndexList(list);
-		return count;
+		return this.batchInsert(list);
+		// SqlSession session =
+		// sqlSessionFactory.openSession(ExecutorType.BATCH);
+		// int count = 0;
+		// try {
+		// for (DmhyData data : list) {
+		// count = count +
+		// session.insert("com.shaw.mapper.DmhyDataMapper.insert", data);
+		// }
+		// session.commit();
+		// } catch (Exception e) {
+		// session.rollback();
+		// }
+		// dmhyDataIndex.addIndexList(list);
+		// return count;
 	}
 
 	/*
