@@ -6,4 +6,5 @@
 <p>种子下载脚本-python</p>
 <p>lucene实现提供动画索引</p>
 <p>与python_test项目下的Crawler共用mysql与redis的数据<p>
+<P> 后续项目核心会转到python_test 中。建立全自动化的资源爬取-》资源筛选-》资源下载 脚本程序。<P>
 
