@@ -40,7 +40,7 @@ def main(config_file_path):
     filename = config.get('global', 'filename')
     magent = config.get('global', 'magnet')
     print "start download file %s" % filename.decode("utf-8");
-    magnet2t(magent, 'resource/%s.torrent' % filename);
+    magnet2t(magent, os.getcwd() + '/resource/%s.torrent' % filename);
     return;
     
 # 读取data.ini中的配置文件,获取磁链和文件名，开始下载种子文件

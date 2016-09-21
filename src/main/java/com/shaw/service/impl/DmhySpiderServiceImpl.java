@@ -180,7 +180,8 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 			// 设置已下载状态，避免重复下载
 			this.singleRedisClient.set(String.format(Constants.DOWNLOAD_START, title), title);
 			// 设置 已下载标识的过期时间为当天凌晨后过期。
-			if (singleRedisClient.expireAt(String.format(Constants.DOWNLOAD_START, title), endTime.getTime()) != 1) {
+			int exprieTime = (int) ((endTime.getTime() - new Date().getTime()) / 1000);
+			if (singleRedisClient.expire(String.format(Constants.DOWNLOAD_START, title), exprieTime) != 1) {
 				logger.error("key : " + String.format(Constants.DOWNLOAD_START, title)
 						+ "set expireat fail ,please delete it by  manual ");
 			}
@@ -199,10 +200,9 @@ public class DmhySpiderServiceImpl implements DmhySpiderService {
 	}
 
 	/*
-	 * 正常情况的批量插入，但因为插入后无法获取数据id，无法执行添加索引的操作。 在搜索中心建立之前 不能使用此方法。
+	 * 正常情况的批量插入，但因为插入后无法获取数据id，无法执行添加索引的操作。 在搜索中心建立之前 不能使用此方法。 搜索中心建立重新启用该方法
 	 */
 	@Override
-	@Deprecated
 	public Integer batchInsert(List<DmhyData> list) throws Exception {
 		return this.dmhyDataMapper.batchInsert(list);
 	}

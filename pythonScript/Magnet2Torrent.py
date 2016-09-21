@@ -4,11 +4,12 @@ from single_conn import execute_low_level
 import time
 import redis
 import json
+import os
 
 def magnet2t(link, tfile):
     sess = lt.session()
     params = {
-        "save_path": './resource/',
+        "save_path": '/',
         "storage_mode": lt.storage_mode_t.storage_mode_sparse,
         "paused": True,
         "auto_managed": True,
@@ -29,7 +30,7 @@ def magnet2t(link, tfile):
         torinfo = handle.get_torrent_info()
         torfile = lt.create_torrent(torinfo)
 
-        t = open(tfile.decode("utf-8"), "wb")
+        t = open(tfile, "wb")
         t.write(lt.bencode(torfile.generate()))
         t.close()
         print '%s  generated!' % tfile
@@ -38,9 +39,9 @@ def magnet2t(link, tfile):
         return False
     return True
 
-def  end_torrent(jstr, name):
+def  end_torrent(jstr, path):
     r = redis.StrictRedis("localhost", 6379)
-    execute_low_level("LPUSH", "Torrent_Queue", 'resource/%s.torrent' % name, host='localhost', port=6379)
+    execute_low_level("LPUSH", "Torrent_Queue", path, host='localhost', port=6379)
     execute_low_level("LREM", "Magnet_Queue_Bak", 1, jstr, host='localhost', port=6379)
 
 def main():
@@ -50,8 +51,8 @@ def main():
         name = jobj['simpleName'];
         magnet = jobj['magnetLink']
         print name
-        if  magnet2t(magnet, 'resource/%s.torrent' % name.encode("UTF-8")):
-             end_torrent(jstr, name)
+        if  magnet2t(magnet, os.getcwd() + '/resource/%s.torrent' % name):
+             end_torrent(jstr, os.getcwd() + '/resource/%s.torrent' % name)
         else:
             return 
     
