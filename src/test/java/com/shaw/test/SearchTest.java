@@ -21,8 +21,8 @@ public class SearchTest extends SpringTestCase {
 
 	@Test
 	public void testSearchDmhyData() throws Exception {
-		String keyword = "NEW GAME 12";
-		Result<List<DmhyDataVo>> result = dmhyDataSearchService.searchDmhyData(keyword);
+		String keyword = "魔法少女☆伊莉雅 12";
+		Result<List<DmhyDataVo>> result = dmhyDataSearchService.searchDmhyData(keyword, null);
 		if (result != null && result.isSuccess() && result.getModel() != null) {
 			for (DmhyDataVo vo : result.getModel()) {
 				System.out.println(vo.toString());
@@ -33,7 +33,7 @@ public class SearchTest extends SpringTestCase {
 	@Test
 	public void testSearchBlog() {
 		String keyword = "spring";
-		Result<List<BlogVo>> result = blogSearchService.searchBlog(keyword);
+		Result<List<BlogVo>> result = blogSearchService.searchBlog(keyword, null);
 		if (result != null && result.isSuccess() && result.getModel() != null) {
 			for (BlogVo vo : result.getModel()) {
 				System.out.println(vo.getTitle());
