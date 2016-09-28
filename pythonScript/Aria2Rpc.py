@@ -5,6 +5,7 @@ import time
 import base64
 from single_conn import execute_low_level
 import json
+from config import *
 
 class Aria2JsonRpc(object):
     def __init__(self, rpc_url, arai2_path):
@@ -79,9 +80,10 @@ class Aria2JsonRpc(object):
 
 if __name__ == '__main__':
     # 模式2 通过种子下载文件
-    mode = 2
+    config = Config("config.ini")
     rpc_url = "http://localhost:6800/jsonrpc?tm=%s"
-    aria2_path = "D:/Program Files/aria2-1.27.1/"
+    mode = config.get("system","aria2_mode")
+    aria2_path = config.get("system","aria2_path")
     rpcClient = Aria2JsonRpc(rpc_url, aria2_path)
     # 下载链接
     if not rpcClient.isAlive():

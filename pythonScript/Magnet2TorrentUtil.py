@@ -45,4 +45,4 @@ def main(config_file_path):
     
 # 读取data.ini中的配置文件,获取磁链和文件名，开始下载种子文件
 if __name__ == '__main__':
-    main('data.ini')
+    main('magnetData.ini')

@@ -9,4 +9,18 @@
 <br>
 <p>本项目的python未完全实现版本在python_test中，可以和本项目共用mysql与redis中的数据，<p>
 <P>后续项目核心会转到python_test 中。建立更加自动化、轻量的资源爬取-》资源筛选-》资源下载 脚本程序，<P>
+<br/>
+<br/>
+<br/>
+本项目的依赖环境：(暂只支持windows环境)<br>
+jdk1.7+,python2.7<br>
+DB : mysql,redis<br>
+运行项目必须的 python库依赖包括：redis,requests,libtorrent.
+其他程序： Aria2+任意一款 Aria2 GUI
+
+
+
+
+
+
 
