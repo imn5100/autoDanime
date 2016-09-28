@@ -1,0 +1,14 @@
+python script目录说明：
+项目主要依赖两个脚本：
+Magnet2Torrent.py     获取redis中Magnet数据转化为torrent
+Aria2Rpc.py           获取torrent文件信息提交Aria2执行下载任务 
+
+其他关联：
+config.py 			       获取ini文件配置工具类。
+single_conn.py 		       执行redis单连接命令工具类
+Magnet2TorrentUtil.py 读取magnetData.ini 中的magnet 并下载为torrent 的工具。
+
+config.ini 			  Aria2.py 相关配置
+magnetData.ini        *见 Magnet2TorrentUtil.py
+
+startAria2Rpc 		  windows环境下,辅助Aria2Rpc 启动Aria2 Rpc 服务的脚本。

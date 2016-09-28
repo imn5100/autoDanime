@@ -20,7 +20,7 @@ Anime automatic download tool
 jdk1.7 + python2.7.<br>
 DB : mysql,redis.<br>
 运行项目所需的python扩展库：redis,requests,libtorrent.<br>
-其他程序依赖： Aria2 + 任意一款 Aria2 GUI 推荐 : <a href="https://github.com/binux/yaaw">YAAW</a>||<a href="https://github.com/acgotaku/YAAW-for-Chrome">YAAW-for-Chrome<a>||<a href="https://github.com/ziahamza/webui-aria2">webui-aria2<a/>.<br>
+其他程序依赖： <a href="https://github.com/aria2/aria2/releases" target="_blank">ARIA2</a> + 任意Aria2 GUI<a href="https://github.com/binux/yaaw" target="_blank">YAAW</a>||<a href="https://github.com/acgotaku/YAAW-for-Chrome" target="_blank">YAAW-for-Chrome<a>||<a href="https://github.com/ziahamza/webui-aria2" target="_blank">webui-aria2<a/>.<br>
 
 
 
